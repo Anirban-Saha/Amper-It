@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Amper</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="dist/build.js"></script>
+    <style>
+        body {
+            background-color: #f7fafc;
+        }
+    </style>
+</head>
+<body class="m-0 p-0 font-sans">
+    <!-- Modal -->
+    <div id="launchModal" class="hidden fixed inset-0 bg-black bg-opacity-40 z-50">
+        <div class="relative bg-white mx-auto mt-[10%] w-[40%] shadow-lg animate-[animatetop_0.4s] rounded-lg">
+            <div class="bg-gray-200 px-4 py-2 rounded-t-lg">
+                <span id="close-modal" class="float-right text-2xl font-bold cursor-pointer">&times;</span>
+                <h2 class="text-gray-700">Hey there!</h2>
+            </div>
+            <div class="px-4 py-2 text-center">
+                <p>This project is an experiment that uses Tensorflow.js and your webcam to make Amazon Echo respond to sign language. It began with a simple question:</p>
+                <p class="font-bold italic my-2">"If voice is the future of computing what about those who cannot hear or speak?"</p>
+                <p>You can find the code for this demo on <a href="https://github.com/shekit/alexa-sign-language-translator" class="text-gray-600 hover:text-gray-800" target="_blank">github</a> or watch a <a href="https://www.youtube.com/watch?v=kS53y6GWm0w" class="text-gray-600 hover:text-gray-800" target="_blank">video</a> of it in action.</p>
+                <p class="text-sm italic">Note: This demo runs entirely in your browser without any data sent to any server</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Status Bar -->
+    <div id="status" class="hidden w-[300px] h-[50px] bg-gray-200 absolute z-30 top-0 left-1/2 -translate-x-1/2 border-x-2 border-b-2 border-gray-300 rounded-b-lg text-center shadow-md">
+        <p id="status-text" class="text-gray-700 font-bold">Status: Not Ready</p>
+    </div>
+
+    <!-- Video Element -->
+    <video
+        id="video"
+        class="absolute left-1/2   top-[5%]  w-50 z-10 bg-cyan-900 border-2 border-gray-300 rounded-lg  transition-all duration-300 hover:scale-105 w-[30%] h-[auto]"
+        muted
+        autoplay
+        playsinline
+    ></video>
+
+    <!-- Left Panel -->
+    <div class="split-left fixed h-full w-[39.75%] left-0 top-0 border-r-2 border-gray-300 bg-gray-100 overflow-x-hidden pt-5 pb-5">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center w-3/4">
+            <h1 id="text" class="text-3xl font-bold text-gray-700 intro-steps">Step 1: Enter Words<br><span class="text-sm font-normal">Add a few words below. In the next step we'll associate each word with signs from the webcam</span></h1>
+            <div id="training-list">
+                <div id="example-list"></div>
+                <div id="add" class="mt-4">
+                    <form id="add-word" class="border border-gray-300 p-4 rounded-lg shadow-md" autocomplete="off">
+                        <input type="text" id="new-word" placeholder="Add Training word" class="border border-gray-300 p-2 rounded w-full">
+                        <div class="my-4">
+                            <label class="flex items-center gap-2">
+                                <input type="checkbox" id="is-terminal-word" class="form-checkbox">
+                                Is terminal word?
+                            </label>
+                        </div>
+                        <input type="submit" value="Add Word" class="bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded shadow">
+                        <p class="mt-2"><b>Terminal Word</b> - A word that appears as the last word in your query</p>
+                    </form>
+                </div>
+                <p id="count" class="mt-4">Training: 2 words</p>
+                <div id="action-btn" class="mt-4"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Panel -->
+    <div class="split-right fixed h-full w-[59.75%] right-0 top-0 border-l-2 border-gray-300 bg-white overflow-x-hidden pt-5 pb-5">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center w-3/4">
+            <div id="loader" class="hidden"></div>
+            <h1>
+                <span id="answerText" class="text-gray-700"></span>
+                <span id="interimText" class="text-gray-500"></span>
+            </h1>
+        </div>
+    </div>
+</body>
+</html>
