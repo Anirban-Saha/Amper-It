@@ -14,7 +14,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } } // Launch in kiosk mode
-// /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --kiosk --app=http://localhost:9966
+
 
 
 // Webcam Image size. Must be 227. 
@@ -25,11 +25,7 @@ var TOPK = 10;
 var predictionThreshold = 0.98;
 
 var words = ["Hey, I am Amper!", "hello", "other"];
-// var words = ["alexa", "hello", "what is", "the weather", "the time",
-//"add","eggs","to the list","five","feet","in meters","tell me","a joke", "bye", "other"]
 
-
-// words from above array which act as terminal words in a sentence
 var endWords = ["hello"];
 
 var LaunchModal = function LaunchModal() {
@@ -61,19 +57,17 @@ var Main = function () {
 
     _classCallCheck(this, Main);
 
-    // Initiate variables
     this.infoTexts = [];
-    this.training = -1; // -1 when no class is being trained
+    this.training = -1;
     this.videoPlaying = false;
 
     this.previousPrediction = -1;
     this.currentPredictedWords = [];
 
-    // variables to restrict prediction rate
     this.now;
     this.then = Date.now();
     this.startTime = this.then;
-    this.fps = 5; //framerate - number of prediction per second
+    this.fps = 5; 
     this.fpsInterval = 1000 / this.fps;
     this.elapsed = 0;
 
@@ -108,7 +102,6 @@ var Main = function () {
         words.splice(words.length - 1, 0, word); //insert at penultimate index in array
         _this2.createButtonList(false);
         _this2.updateExampleCount();
-        //console.log(words)
 
 
         if (checkbox.checked) {

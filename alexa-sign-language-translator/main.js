@@ -183,7 +183,7 @@ class Main {
     div.innerHTML = ""
 
     const trainButton = document.createElement('button')
-    trainButton.innerText = "Training >>>"
+    trainButton.innerText = "Training ⏭ "
     div.appendChild(trainButton);
 
 
